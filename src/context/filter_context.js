@@ -15,7 +15,8 @@ import { useProductsContext } from "./products_context";
 const initialState = {
   filtered_products: [],
   all_products: [],
-  grid_view: false,
+  grid_view: true,
+  sort: "price-lowest",
 };
 
 const FilterContext = React.createContext();
@@ -28,8 +29,29 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
 
+  useEffect(() => {
+    dispatch({ type: SORT_PRODUCTS });
+  }, [products, state.sort]);
+
+  // Products page view toggle functionality. View functions are set up in Sort.js page
+
+  const setGridView = () => {
+    dispatch({ type: SET_GRIDVIEW });
+  };
+  const setListView = () => {
+    dispatch({ type: SET_LISTVIEW });
+  };
+
+  const sortUpdater = (e) => {
+    // const name = e.target.name;
+    const value = e.target.value;
+    // console.log(name, value);
+    dispatch({ type: UPDATE_SORT, payload: value });
+  };
+
   return (
-    <FilterContext.Provider value={{ ...state }}>
+    <FilterContext.Provider
+      value={{ ...state, setGridView, setListView, sortUpdater }}>
       {children}
     </FilterContext.Provider>
   );

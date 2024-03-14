@@ -4,7 +4,8 @@ import GridView from "./GridView";
 import ListView from "./ListView";
 
 const ProductList = () => {
-  const { filtered_products: products, grid_view } = useFilterContext();
+  const { grid_view, filtered_products: products } = useFilterContext();
+  // console.log(products);
   if (products.length < 1) {
     return (
       <h5 style={{ textTransform: "none" }}>
@@ -15,7 +16,7 @@ const ProductList = () => {
   if (grid_view === false) {
     return <ListView products={products} />;
   }
-  return <GridView products={products}></GridView>;
+  return <GridView products={products} />;
 };
 
 export default ProductList;
