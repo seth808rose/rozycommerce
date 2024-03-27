@@ -17,6 +17,16 @@ const initialState = {
   all_products: [],
   grid_view: true,
   sort: "price-lowest",
+  filters: {
+    text: "",
+    company: "all",
+    category: "all",
+    color: "all",
+    min_price: 0,
+    max_price: 0,
+    price: 0,
+    shipping: false,
+  },
 };
 
 const FilterContext = React.createContext();
@@ -42,6 +52,7 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_LISTVIEW });
   };
 
+  // function that handles the sort buttons when user changes the sort layout of the products
   const sortUpdater = (e) => {
     // const name = e.target.name;
     const value = e.target.value;
@@ -49,9 +60,26 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 
+  // function that will handle all the onChanges per filter option when selected
+  const updateFilters = (e) => {
+    let name = e.target.name;
+    let value = e.target.value;
+    // console.log(value, name);
+    dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+  };
+
+  const clearFilters = () => {};
+
   return (
     <FilterContext.Provider
-      value={{ ...state, setGridView, setListView, sortUpdater }}>
+      value={{
+        ...state,
+        setGridView,
+        setListView,
+        sortUpdater,
+        updateFilters,
+        clearFilters,
+      }}>
       {children}
     </FilterContext.Provider>
   );
