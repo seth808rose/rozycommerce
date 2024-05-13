@@ -65,6 +65,15 @@ export const FilterProvider = ({ children }) => {
     let name = e.target.name;
     let value = e.target.value;
     // console.log(value, name);
+
+    if(name === 'category'){
+      value = e.target.textContent;
+    }
+
+    if(name === 'color'){
+      value = e.target.dataset.color;
+    }
+
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 
