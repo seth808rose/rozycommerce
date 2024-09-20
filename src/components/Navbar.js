@@ -1,26 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../assets/logo.svg";
+// import logo from "../assets/logo.svg";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../utils/constants";
 import CartButtons from "./CartButtons";
+import { SiAbbrobotstudio } from "react-icons/si";
 import { useProductsContext } from "../context/products_context";
 
 const Nav = () => {
   const { openSideBar } = useProductsContext();
   return (
     <NavContainer>
-      <div className='nav-center'>
-        <div className='nav-header'>
-          <Link to='/'>
-            <img src={logo} alt='comfy sloth' />
+      <div className="nav-center">
+        <div className="nav-header">
+          <Link to="/">
+            <SiAbbrobotstudio />
           </Link>
-          <button onClick={openSideBar} type='button' className='nav-toggle'>
+          <button onClick={openSideBar} type="button" className="nav-toggle">
             <FaBars />
           </button>
         </div>
-        <ul className='nav-links'>
+        <ul className="nav-links">
           {links.map((link) => {
             const { id, text, url } = link;
             return (
