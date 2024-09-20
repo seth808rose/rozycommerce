@@ -106,7 +106,8 @@ p {
   color: var(--clr-grey-3);
 }
 
-.nav-header :first-child svg {
+.nav-header :first-child svg,
+.sidebar-header > svg {
   font-size: 3rem;
   color: brown;
 }
